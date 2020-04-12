@@ -11,7 +11,7 @@ access_secret = "GTa4it7WQ4pXnvu1klWlFnbMFfUSVVBw8gvu0sipWGeD7"
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_key, access_secret)
 api = tweepy.API(auth)
-dir = r"C:\Users\Techy\Anaconda3\envs\poltweet\conda-meta\My Stuff\Data"
+dir = r"C:\Users\Techy\Anaconda3\envs\poltweet\My Stuff\Data"
 def get_tweets(username):
     tmp = []
     for tweet in api.user_timeline(screen_name = username,count=200):
@@ -19,7 +19,7 @@ def get_tweets(username):
                 if not "RT @" in tweet.text:
                     tmp.append(tweet)
     outtweets = [[(tweet.created_at).strftime('%m/%d/%Y'), tweet.text.encode("utf-8")] for tweet in tmp]
-    dir = r"C:\Users\Techy\Anaconda3\envs\poltweet\conda-meta\My Stuff\Data" + "/" + username + "_tweets" + ".txt" 
+    dir = r"C:\Users\Techy\Anaconda3\envs\poltweet\My Stuff\Data" + "/" + username + "_tweets" + ".txt" 
     with open(dir, 'w') as f:
 	    writer = csv.writer(f)
 	    writer.writerow(["created_at","text"])
