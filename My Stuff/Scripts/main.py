@@ -9,6 +9,8 @@ from textblob import TextBlob
 import nltk
 from textblob import Blobber
 from textblob.sentiments import NaiveBayesAnalyzer
+import fixdata
+import os
 consumer_key = "wBlchO1ZEiGnv1ly1wmVplNr5"
 consumer_secret = "iyHcmJITDblWRf4Zj46r19UVbngnU8DoXkBoXCtchZpZ7kF6HT"
 access_key = "1214224530341629952-RpXwF26MvZ0KEBJTcYzwEhKHgE4vQx"
@@ -62,7 +64,6 @@ class company():
             for row in reader:
                 if row == []:
                         continue
-                print(row)
                 if row[0] == "created_at":
                     continue
                 tw = TextBlob(str(row[1]))
@@ -81,7 +82,7 @@ class company():
             with open(dir, 'w') as f:
 	            writer = csv.writer(f)
 	            writer.writerow(["Date","Polarity"])
-	            writer.writerows(sentiments)        
+	            writer.writerows(sentiments)      
     def get_stonks(self):
         global tmp
         ticker = self.ticker
@@ -103,6 +104,7 @@ class company():
         company.get_tweets(self)
         company.get_stonks(self)
         company.Sentimentweet(self)
+        fixdata.graphem(self.twitter)
 #companies = input("how many companies would you like to analyze?")
 #for i in range(int(companies)):
  #   companyt = input("Corperate twitter handle?")
@@ -112,5 +114,5 @@ class company():
  #       twtnum = 200
  #   c = company(ticker,companyt,int(twtnum))        
  #   c.main()
-c = company("MSFT","Microsoft",200)
+c = company("INTC","Intel",200)
 c.main()    
